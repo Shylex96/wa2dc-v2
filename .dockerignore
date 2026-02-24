@@ -1,0 +1,12 @@
+node_modules/
+downloads/
+*.exe
+*.oldVersion
+build/
+*.bat
+docs/
+.github/
+.git
+storage/
+logs.txt
+.env

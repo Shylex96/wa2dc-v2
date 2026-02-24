@@ -1,0 +1,16 @@
+node_modules/
+logs.txt
+terminal.log
+storage.db
+downloads/
+*.exe
+*.oldVersion
+build/
+*.bat
+storage/
+out.js
+out.cjs
+.env
+.vscode/settings.json
+__pycache__/
+tests/__pycache__/

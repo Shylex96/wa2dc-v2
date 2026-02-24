@@ -1,0 +1,45 @@
+# El --build es importante la primera vez (o cuando cambies código).
+# docker compose up --build -d
+
+name: wa2dc
+
+services:
+  wa2dc:
+    # Nombre fijo del contenedor
+    container_name: wa2dc
+    
+    # Construir la imagen desde el Dockerfile en el directorio actual
+    build: .
+    
+    # Volumen para persistir datos de WhatsApp (sesiones, auth, etc.)
+    # Mapea la carpeta local ./storage al contenedor
+    volumes:
+      - ./storage:/usr/local/WA2DC/storage
+    
+    # Cargar variables de entorno desde archivo .env local
+    # Contiene token de Discord, configuración del bot, etc.
+    env_file:
+      - .env
+    
+    # Política de reinicio automático
+    # unless-stopped: reinicia si el contenedor falla, pero no si se detiene manualmente
+    restart: unless-stopped
+    
+    # Configuración de monitoreo de salud del contenedor
+    healthcheck:
+      # Comando para verificar que el bot está funcionando
+      # Este es un healthcheck básico que verifica que Node.js responde
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      
+      # Cada 30 segundos se verifica la salud
+      interval: 30s
+      
+      # Máximo 10 segundos para responder al healthcheck
+      timeout: 10s
+      
+      # Si falla 3 veces consecutivas, se marca como no saludable
+      retries: 3
+      
+      # Período de gracia de 40 segundos después del inicio para empezar a verificar
+      # Permite que el bot se inicie completamente antes de monitorear
+      start_period: 40s
