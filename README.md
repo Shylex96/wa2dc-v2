@@ -53,8 +53,8 @@ Esto garantiza un inicio limpio.
 
 ## Configuración
 
-- Instrucciones detalladas [aquí](setup.md).
+- Instrucciones detalladas [aquí](docs/setup.md).
 
 ## Comandos
 
-- Listado completo de comandos [aquí](commands.md).
+- Listado completo de comandos [aquí](docs/commands.md).
